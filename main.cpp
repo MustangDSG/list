@@ -44,7 +44,7 @@ class Elemlist                          //описываем класс спис
         else
         {
            system("cls");
-           cout << "Spisok Pust!!!" << endl;
+           std::wcout<<L"Список пустой, удалять нечего!!!" << endl;
            system("pause");
         }
     }
@@ -63,6 +63,7 @@ class Elemlist                          //описываем класс спис
 
 int main()
 {
+    setlocale(LC_CTYPE,"Russian");
     float q;                            //переменная ввода данных в элемент списка
     Elemlist m;                         //собственно наш список
     string y = "y";                     //переменная для цикла добавления нового элемента в список
@@ -76,20 +77,20 @@ int main()
             //system("color A");
             HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleTextAttribute(hStdOut,FOREGROUND_GREEN |FOREGROUND_INTENSITY);
-            cout << "\nVvedite chislovoe znachenie novogo elementa spiska: ";
+            std::wcout<<L"\nВведите числовое значение для нового элемента списка: ";
             cin >> q;
             m.add(q);
-            cout << "\n'y' - novoe znachenie; Any key - vivod spiska: ";
+            std::wcout<<L"\nВведите 'y' для вода нового элемента; введите 'любое значение' для вывода списка: ";
             cin >> y;
     }
     system("cls");
     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hStdOut,FOREGROUND_BLUE |FOREGROUND_INTENSITY);
-    cout << "\nSpisok:" << endl;
+    std::wcout<<L"\nСписок:" << endl;
     SetConsoleTextAttribute(hStdOut,FOREGROUND_GREEN |FOREGROUND_INTENSITY);
     m.vivod();
     SetConsoleTextAttribute(hStdOut,FOREGROUND_RED |FOREGROUND_INTENSITY);
-    cout << "\nUdalit perviy element? Y - Da, Any key - prodoljit: ";
+    std::wcout<<L"\nУдалить первый элемент? y - удалить | 'любое значение' - продолжить: ";
     cin >> z;
     if (z == "y")                       // условие запуска цикла удаления первого элемента списка
     {
@@ -99,18 +100,18 @@ int main()
             system("cls");
             HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleTextAttribute(hStdOut,FOREGROUND_BLUE |FOREGROUND_INTENSITY);
-            cout << "\nSpisok:" << endl;
+            std::wcout<<L"\nСписок:" << endl;
             SetConsoleTextAttribute(hStdOut,FOREGROUND_GREEN |FOREGROUND_INTENSITY);
             m.vivod();
             cout << endl;
             SetConsoleTextAttribute(hStdOut,FOREGROUND_RED |FOREGROUND_INTENSITY);
-            cout << "Udalit noviy perviy element? Y - Da, Any key - prodoljit: ";
+            std::wcout<<L"Удалить новый первый элемент? 'y' - удалить, 'любое значение' - продолжить: ";
             cin >> w;
 
         }
     }
     SetConsoleTextAttribute(hStdOut,FOREGROUND_GREEN |FOREGROUND_INTENSITY);
-    cout << "Dobavit novie elementy? Y - Da, Any key - exit: ";
+    std::wcout<<L"Добавить новые элементы? 'y' - добавить, 'любое значение' - выход: ";
     y = "y";                               //обновление значения переменной
     z = "y";                               //обновление значения переменной
     w = "y";                               //обновление значения переменной
