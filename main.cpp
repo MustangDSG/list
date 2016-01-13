@@ -83,9 +83,11 @@ int main()
             cin >> y;
     }
     system("cls");
-    cout << "\nSpisok:" << endl;
-    m.vivod();
     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hStdOut,FOREGROUND_BLUE |FOREGROUND_INTENSITY);
+    cout << "\nSpisok:" << endl;
+    SetConsoleTextAttribute(hStdOut,FOREGROUND_GREEN |FOREGROUND_INTENSITY);
+    m.vivod();
     SetConsoleTextAttribute(hStdOut,FOREGROUND_RED |FOREGROUND_INTENSITY);
     cout << "\nUdalit perviy element? Y - Da, Any key - prodoljit: ";
     cin >> z;
@@ -96,6 +98,7 @@ int main()
             m.delf();
             system("cls");
             HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(hStdOut,FOREGROUND_BLUE |FOREGROUND_INTENSITY);
             cout << "\nSpisok:" << endl;
             SetConsoleTextAttribute(hStdOut,FOREGROUND_GREEN |FOREGROUND_INTENSITY);
             m.vivod();
