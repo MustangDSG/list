@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstring>
-#include <conio.h>
 #include <windows.h>
 
 using namespace std;
@@ -63,7 +62,7 @@ class Elemlist                          //описываем класс спис
 
 int main()
 {
-    setlocale(LC_CTYPE,"Russian");
+    setlocale(LC_CTYPE,"");
     float q;                            //переменная ввода данных в элемент списка
     Elemlist m;                         //собственно наш список
     string y = "y";                     //переменная для цикла добавления нового элемента в список
