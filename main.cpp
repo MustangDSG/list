@@ -15,19 +15,22 @@ struct Elem                             //описываем структуру 
 class Elemlist                          //описываем класс списка из элементов структуры Elem
 {
  private:                               //закрытая часть класса
+    int counter;                        //счетчик элементот
     Elem* first;                        //указатель на первый элемент списка
-    Elem* last;                         //указатель последний элемент списка
- public:                                //открытая часть класса
-    Elemlist()
-    {
-        first = NULL;
-        last = NULL;
-    }
+    Elem* last;                         //указатель последний элемент списка              
+public:                                 //открытая часть класса
+   Elemlist()
+   {
+       counter = 0;
+       first = NULL;
+       last = NULL;
+   }
     void add(int d)                     //функция добавления нового элемента в список
     {
        Elem *newelem = new Elem;        //выделение памяти для нового элемента
        newelem -> data = d;             //задаем значение data новому элементу структуры
        newelem -> next = NULL;          //зануляем значение указателя на следующий элемент
+       counter++;                       //увеличиваем значение счетчика элементов
        if (first == NULL)               //проверка, если список пустой - новый элемент структуры станет первым и одновременно последним, предыдущий станет NULL
        {
             first = newelem;
@@ -46,8 +49,10 @@ class Elemlist                          //описываем класс спис
         Elem *deletf = first;
         if (first)                      //проверка что первый элемент существует
         {
-        cout << "Udalyau: " << deletf->data<<endl;
         first = deletf->next;
+        first->prev=NULL;
+        counter--;
+        delete deletf;
         }
         else
         {
@@ -56,6 +61,50 @@ class Elemlist                          //описываем класс спис
            system("pause");
         }
     }
+
+
+    void del(int v)                     //метод удаления произвольного элемента
+{
+    if ((v==1) and (first->next) and (counter != 0))
+    {
+        Elem *delelem=first;
+        first=first->next;
+        first->prev=NULL;
+        delete delelem;
+        counter--;
+        system("pause");
+     }
+    else if ((v==1) and (first==last) and (counter != 0))
+    {
+        first->next=NULL;
+        first=NULL;
+        delete first;
+        counter--;
+        system("pause");
+    }
+    else if ((v==counter) and (counter != 0))
+    {
+        Elem *delelem=last;
+        last=last->prev;
+        last->next=NULL;
+        delete delelem;
+        counter--;
+        system("pause");
+    }
+    else if (counter=0)
+    {
+        std::wcout<<L"Список пустой, удалять нечего!!!";
+        system("pause");
+    }
+    Elem *delelem=first,*delelem2;
+    for (int i=0;i<v-1;i++) delelem=delelem->next;
+    delelem2=delelem;
+    delelem2->prev->next=delelem->next; //указываем, что следующий элемент для того, что стоит перед удаляемым это элемент, который стоит после удаляемого
+    delelem2->next->prev=delelem->prev; //указываем, что предыдущий эелемент для того, что стоит после удаляемого это элемент, который стоит перед удаляемым
+    delete delelem;
+    counter--;
+    system("pause");
+}
 
     void vivod()                        //функция вывода списка от начала к концу
     {
