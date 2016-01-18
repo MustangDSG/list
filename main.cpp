@@ -2,6 +2,7 @@
 #include <cstring>
 #include <fstream>
 using namespace std;
+ofstream result;
 
 struct Elem                             //описываем структуру элемента связного списка
 {
@@ -62,7 +63,6 @@ public:                                 //открытая часть класс
             first -> prev = NULL;
             delete delelem;
             counter--;
-            ofstream result;
             result.open("result.txt", ios::out);
             result.close();
         }
@@ -74,7 +74,6 @@ public:                                 //открытая часть класс
             last = NULL;
             delete first;
             counter--;
-            ofstream result;
             result.open("result.txt", ios::out);
             result.close();
         }
@@ -85,7 +84,6 @@ public:                                 //открытая часть класс
             last -> next = NULL;
             delete delelem;
             counter--;
-            ofstream result;
             result.open("result.txt", ios::out);
             result.close();
         }
@@ -99,7 +97,6 @@ public:                                 //открытая часть класс
             delelem2 -> next -> prev = delelem -> prev; //указываем, что предыдущий эелемент для того, что стоит после удаляемого это элемент, который стоит перед удаляемым
             delete delelem;
             counter--;
-            ofstream result;
             result.open("result.txt", ios::out);
             result.close();
         }
@@ -107,14 +104,12 @@ public:                                 //открытая часть класс
 
     void vivod()                        //функция вывода списка от начала к концу
     {
-        ofstream result;
         result.open("result.txt", ios::app);
         result << "---------------List from beginning to end:" << endl;
         result.close();
         Elem *info = first;
         while(info)
         {
-            ofstream result;
             result.open("result.txt", ios::app);
             cout << info -> data << endl;
             result << info -> data << endl;
@@ -125,14 +120,12 @@ public:                                 //открытая часть класс
 
     void vivod2()                        //функция вывода списка от конца к началу
     {
-        ofstream result;
         result.open("result.txt", ios::app);
         result << "---------------List from back to front:" << endl;
         result.close();
         Elem *info2 = last;
         while(info2)
         {
-            ofstream result;
             result.open("result.txt", ios::app);
             cout << info2 -> data << endl;
             result << info2 -> data << endl;
@@ -144,7 +137,6 @@ public:                                 //открытая часть класс
 
 int main()
 {
-    ofstream result;
     result.open("result.txt", ios::out);
     result.close();
     string q;                           //переменная ввода данных в элемент списка
@@ -170,7 +162,6 @@ int main()
         m.vivod();
         cout << "\nList from back to front:" << endl;
         m.vivod2();
-        //result<<123;
         cout << "\nDo you want to remove any item, y/n -? :";
         cin >> z;
         if ( z == "y" )
