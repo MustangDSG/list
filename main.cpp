@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-#include <cctype>
 using namespace std;
 ofstream result;
 
