@@ -105,33 +105,40 @@ public:                                 //открытая часть класс
 
     void vivod()                        //функция вывода списка от начала к концу
     {
+        int counter2 = 1;
         result.open("result.txt", ios::app);
         result << "---------------List from beginning to end:" << endl;
         result.close();
         Elem *info = first;
+        Elem *info2 = last;
         while(info)
         {
             result.open("result.txt", ios::app);
-            cout << info -> data << endl;
-            result << info -> data << endl;
+            cout << counter2 << ". " <<info -> data << endl;
+            result << counter2 << ". " <<info -> data << endl;
             result.close();
             info = info -> next;
+            if (info)
+            {
+                counter2++;
+            }
         }
-    }
-
-    void vivod2()                        //функция вывода списка от конца к началу
-    {
         result.open("result.txt", ios::app);
         result << "---------------List from back to front:" << endl;
         result.close();
-        Elem *info2 = last;
+        cout << "\nList from back to front:" << endl;
+
         while(info2)
         {
             result.open("result.txt", ios::app);
-            cout << info2 -> data << endl;
-            result << info2 -> data << endl;
+            cout << counter2 << ". " << info2 -> data << endl;
+            result << counter2 << ". " << info2 -> data << endl;
             result.close();
             info2 = info2 -> prev;
+            if (info2)
+            {
+                counter2--;
+            }
         }
     }
 };
@@ -161,8 +168,6 @@ int main()
         system("cls");
         cout << "\nList from beginning to end:" << endl;
         m.vivod();
-        cout << "\nList from back to front:" << endl;
-        m.vivod2();
         cout << "\nDo you want to remove any item, y/n -? :";
         cin >> z;
         if ( z == "y" )
@@ -188,8 +193,6 @@ re: cout << "\nEnter the number of deleted: ";
                 system("cls");
                 cout << "\nList from beginning to end:" << endl;
                 m.vivod();
-                cout << "\nList from back to front:" << endl;
-                m.vivod2();
                 cout << "\nDo you want to remove any item, y/n -? :";
                 cin >> w;
 
