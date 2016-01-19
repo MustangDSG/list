@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <cctype>
 using namespace std;
 ofstream result;
 
@@ -48,12 +49,12 @@ public:                                 //открытая часть класс
     {
         if ( counter == 0 )             //если элементов в списке 0, то вывести сообщение о пустом списке
         {
-            cout << "The list is empty, delete nothing ...\n";
+            cout << "<-------The list is empty, delete nothing...------->\n";
             system("pause");
         }
-        else if ( ( v > counter ) || ( v < 0 ) ) //если введеный номер удаляемого элемента больше чем вообще элементов или отрицательный, то отбой
+        else if ( ( v > counter ) || ( v < 1 ) ) //если введеный номер удаляемого элемента больше чем вообще элементов или отрицательный, то отбой
         {
-            cerr << "This item does not exist\n";
+            cerr << "<-------This item does not exist, try again------->\n";
             system("pause");
         }
         else if ( ( v == 1 ) and ( first -> next ) ) //если удаляется первый элемент, но в списке больше 1 элемента
@@ -91,7 +92,7 @@ public:                                 //открытая часть класс
         {
             Elem *delelem = first;
             Elem *delelem2;
-            for (int i=0;i<v-1;i++) delelem = delelem -> next;
+            for ( int i = 1 ; i < v ; i++ ) delelem = delelem -> next;
             delelem2 = delelem;
             delelem2 -> prev -> next = delelem -> next; //указываем, что следующий элемент для того, что стоит перед удаляемым это элемент, который стоит после удаляемого
             delelem2 -> next -> prev = delelem -> prev; //указываем, что предыдущий эелемент для того, что стоит после удаляемого это элемент, который стоит перед удаляемым
@@ -168,8 +169,21 @@ int main()
         {
             while ( w == "y")
             {
-                cout << "\nEnter the number of deleted: ";
-                cin >> g;
+                char ch;
+                string str;
+re: cout << "\nEnter the number of deleted: ";
+                cin >> str;
+                int strlength = str.length();
+                for ( int t = 0 ; t < strlength; t++ )
+                {
+                    ch = str.c_str()[t];
+                }
+                if ( !isdigit(ch) )
+                {
+                    cerr << "Invalid value, try again\n";
+                    goto re;
+                }
+                g = atoi( str.c_str() );
                 m.del(g);
                 system("cls");
                 cout << "\nList from beginning to end:" << endl;
@@ -178,6 +192,7 @@ int main()
                 m.vivod2();
                 cout << "\nDo you want to remove any item, y/n -? :";
                 cin >> w;
+
             }
         }
         cout << "Add new items? 'y' - add; 'any value' - exit: ";
