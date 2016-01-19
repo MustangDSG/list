@@ -5,33 +5,33 @@
 using namespace std;
 ofstream result;
 
-struct Elem                             //описываем структуру элемента связного списка
+struct Elem                             //Describe the structure of a linked list
 {
-    string data;                        //полезная информация
-    Elem* next;                         //указатель на следующий элемента
-    Elem* prev;                         //указатель на предыдущий элемент
+    string data;                        //The information includes a list item
+    Elem* next;                         //Pointer to the next element
+    Elem* prev;                         //A pointer to the previous element
 };
 
-class Elemlist                          //описываем класс списка из элементов структуры Elem
+class Elemlist                          //We describe a class list of the elements of the structure Elem
 {
-private:                                //закрытая часть класса
-    int counter;                        //счетчик элементот
-    Elem* first;                        //указатель на первый элемент списка
-    Elem* last;                         //указатель последний элемент списка
-public:                                 //открытая часть класса
+private:
+    int counter;                        //Counter items
+    Elem* first;                        //Pointer to the first element of the list
+    Elem* last;                         //Pointer to the last item in the list
+public:
     Elemlist()
     {
         counter = 0;
         first = NULL;
         last = NULL;
     }
-    void add(string d)                   //функция добавления нового элемента в список
+    void add(string d)                   //A method of adding a new item to the list
     {
-        Elem *newelem = new Elem;        //выделение памяти для нового элемента
-        newelem -> data = d;             //задаем значение data новому элементу структуры
-        newelem -> next = NULL;          //зануляем значение указателя на следующий элемент
-        counter++;                       //увеличиваем значение счетчика элементов
-        if (first == NULL)               //проверка, если список пустой - новый элемент структуры станет первым и одновременно последним, предыдущий станет NULL
+        Elem *newelem = new Elem;        //Memory allocation for the new element
+        newelem -> data = d;             //We set the value of data to the new structure element
+        newelem -> next = NULL;          //Assigning a pointer to the next element to NULL
+        counter++;                       //Increase the value of the counter elements
+        if ( first == NULL )             //Checking if the list is empty - a new element of the structure will be the first and last at the same time, the previous will be NULL
         {
             first = newelem;
             newelem -> prev = NULL;
@@ -39,25 +39,25 @@ public:                                 //открытая часть класс
         }
         else
         {
-            newelem -> prev = last;      //указатель на предыдущий элемент, для нового элемента предыдущим будет последний добавленный
-            last -> next = newelem;      //указатель на следующий за последним существующим элементом т.е. тот, что добавляем сейчас
-            last = newelem;              //новый элемент становится последним в списке
+            newelem -> prev = last;      //A pointer to the previous element, for the new element will be the previous recently added
+            last -> next = newelem;      //A pointer to the next element appearing after the last existing element that is the one that is now adding
+            last = newelem;              //A new element becomes the last in the list
         }
     }
 
-    void del(int v)                     //метод удаления произвольного элемента
+    void del(int v)                     //Removal of any element
     {
-        if ( counter == 0 )             //если элементов в списке 0, то вывести сообщение о пустом списке
+        if ( counter == 0 )             //If the list is empty, then display a message indicating an empty list
         {
             cout << "<-------The list is empty, delete nothing...------->\n";
             system("pause");
         }
-        else if ( ( v > counter ) || ( v < 1 ) ) //если введеный номер удаляемого элемента больше чем вообще элементов или отрицательный, то отбой
+        else if ( ( v > counter ) || ( v < 1 ) ) //If the number is more than the element to remove all items in the list or negative, then an error message
         {
             cerr << "<-------This item does not exist, try again------->\n";
             system("pause");
         }
-        else if ( ( v == 1 ) and ( first -> next ) ) //если удаляется первый элемент, но в списке больше 1 элемента
+        else if ( ( v == 1 ) and ( first -> next ) ) //If the first element is removed, but the list of more than 1 item
         {
             Elem *delelem = first;
             first = first -> next;
@@ -67,7 +67,7 @@ public:                                 //открытая часть класс
             result.open("result.txt", ios::out);
             result.close();
         }
-        else if ( (v == 1) and ( first == last ) ) //если удаляется первый и единственный элемент
+        else if ( ( v == 1 ) and ( first == last ) ) //If you delete the first and only item
         {
             first -> next = NULL;
             first -> prev=NULL;
@@ -78,7 +78,7 @@ public:                                 //открытая часть класс
             result.open("result.txt", ios::out);
             result.close();
         }
-        else if ( (v == counter) )                 //если удаляется последний элемент
+        else if ( (v == counter) )                 //If you delete the last item
         {
             Elem *delelem = last;
             last = last -> prev;
@@ -88,14 +88,14 @@ public:                                 //открытая часть класс
             result.open("result.txt", ios::out);
             result.close();
         }
-        else                                       //удаление элемента из середины списка
+        else                                       //Remove item from the middle of the list
         {
             Elem *delelem = first;
             Elem *delelem2;
             for ( int i = 1 ; i < v ; i++ ) delelem = delelem -> next;
             delelem2 = delelem;
-            delelem2 -> prev -> next = delelem -> next; //указываем, что следующий элемент для того, что стоит перед удаляемым это элемент, который стоит после удаляемого
-            delelem2 -> next -> prev = delelem -> prev; //указываем, что предыдущий эелемент для того, что стоит после удаляемого это элемент, который стоит перед удаляемым
+            delelem2 -> prev -> next = delelem -> next; //Indicates that the next item to the fact that it is facing a removable element which is removed after
+            delelem2 -> next -> prev = delelem -> prev; //Point out that the previous element for what is to be removed after an element that stands in front of removable
             delete delelem;
             counter--;
             result.open("result.txt", ios::out);
@@ -103,7 +103,7 @@ public:                                 //открытая часть класс
         }
     }
 
-    void vivod()                        //функция вывода списка от начала к концу
+    void vivod()                        //Output Method numbered list
     {
         int counter2 = 1;
         result.open("result.txt", ios::app);
@@ -111,14 +111,14 @@ public:                                 //открытая часть класс
         result.close();
         Elem *info = first;
         Elem *info2 = last;
-        while(info)
+        while( info )
         {
             result.open("result.txt", ios::app);
             cout << counter2 << ". " <<info -> data << endl;
             result << counter2 << ". " <<info -> data << endl;
             result.close();
             info = info -> next;
-            if (info)
+            if ( info )
             {
                 counter2++;
             }
@@ -127,15 +127,14 @@ public:                                 //открытая часть класс
         result << "---------------List from back to front:" << endl;
         result.close();
         cout << "\nList from back to front:" << endl;
-
-        while(info2)
+        while( info2 )
         {
             result.open("result.txt", ios::app);
             cout << counter2 << ". " << info2 -> data << endl;
             result << counter2 << ". " << info2 -> data << endl;
             result.close();
             info2 = info2 -> prev;
-            if (info2)
+            if ( info2 )
             {
                 counter2--;
             }
@@ -147,29 +146,29 @@ int main()
 {
     result.open("result.txt", ios::out);
     result.close();
-    string q;                           //переменная ввода данных в элемент списка
-    int g;                              //переменная номера удаляемого элемента
-    Elemlist m;                         //собственно наш список
-    string y = "y";                     //переменная для цикла добавления нового элемента в список
-    string x = "y";                     //переменная для главного цикла интерфейса
-    string z = "y";                     //переменная для условия запуска цикла удаления первого элемента списка
-    string w = "y";                     //переменная для цикла удаления первого элемента списка
+    string q;                           //Variable input data item in the list
+    int g;                              //Variable numbers removed element
+    Elemlist m;                         //Our list
+    string y = "y";                     //Variable cycle for adding a new item to the list
+    string x = "y";                     //Variable for the main loop interface
+    string z = "y";                     //Variable trigger conditions for removal cycle of the first element of the list
+    string w = "y";                     //Variable cycle for removing the any item in the list
 
-    while (x == "y")                    //главный цикл управления интерфейсом
+    while (x == "y")                    //The main loop control interface
     {
-        while (y == "y")                //цикл добавления нескольких новых элементов в список
+        while (y == "y")                //Cycle adding several new items to the list
         {
             cout << "\nEnter value for the new list item: ";
-            cin >> q;
+            getline ( cin ,q );
             m.add(q);
             cout << "\nType 'y' to enter a new item; type 'any value' to list: ";
-            cin >> y;
+            getline ( cin , y );
         }
         system("cls");
         cout << "\nList from beginning to end:" << endl;
         m.vivod();
         cout << "\nDo you want to remove any item, y/n -? :";
-        cin >> z;
+        getline ( cin , z );
         if ( z == "y" )
         {
             while ( w == "y")
@@ -177,7 +176,7 @@ int main()
                 char ch;
                 string str;
 re: cout << "\nEnter the number of deleted: ";
-                cin >> str;
+                getline ( cin , str );
                 int strlength = str.length();
                 for ( int t = 0 ; t < strlength; t++ )
                 {
@@ -194,15 +193,14 @@ re: cout << "\nEnter the number of deleted: ";
                 cout << "\nList from beginning to end:" << endl;
                 m.vivod();
                 cout << "\nDo you want to remove any item, y/n -? :";
-                cin >> w;
-
+                getline (cin , w );
             }
         }
         cout << "Add new items? 'y' - add; 'any value' - exit: ";
-        y = "y";                        //обновление значения переменной
-        z = "y";                        //обновление значения переменной
-        w = "y";                        //обновление значения переменной
-        cin >> x;
+        y = "y";                        //Updating the value of the variable
+        z = "y";                        //Updating the value of the variable
+        w = "y";                        //Updating the value of the variable
+        getline ( cin , x );
     }
     cout << endl;
     system("pause");
