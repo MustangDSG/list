@@ -165,7 +165,13 @@ int main()
     string x = "y";                     //Variable for the main loop interface
     string z = "y";                     //Variable trigger conditions for removal cycle of the first element of the list
     string w = "y";                     //Variable cycle for removing the any item in the list
-
+    cout << "Welcome to the program cohesive compilation of the list!" << endl;
+    cout << "(c) 2016 Vaspull - All rights reserved." << endl;
+#ifdef windows
+    cout << "The program is compiled for use in Windows-like system." << endl;
+#else
+    cout << "The program is compiled for use in Linux-like system" << endl;
+#endif
     while (x == "y")                    //The main loop control interface
     {
         while (y == "y")                //Cycle adding several new items to the list
