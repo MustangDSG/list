@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <stdlib.h>
+#define windows                         //To build the program in Linux, you must disable #define windows
 using namespace std;
 ofstream result;
 
@@ -49,12 +51,14 @@ public:
         if ( counter == 0 )             //If the list is empty, then display a message indicating an empty list
         {
             cout << "<-------The list is empty, delete nothing...------->\n";
-            system("pause");
+            cout << "Press ENTER to continue" << endl;
+            cin.get();
         }
         else if ( ( v > counter ) || ( v < 1 ) ) //If the number is more than the element to remove all items in the list or negative, then an error message
         {
             cerr << "<-------This item does not exist, try again------->\n";
-            system("pause");
+            cout << "Press ENTER to continue" << endl;
+            cin.get();
         }
         else if ( ( v == 1 ) and ( first -> next ) ) //If the first element is removed, but the list of more than 1 item
         {
@@ -139,6 +143,15 @@ public:
             }
         }
     }
+
+    void cls()  //crossplatform clear screen
+    {
+#ifdef windows
+        system("cls");
+#else
+        system("clear");
+#endif
+    }
 };
 
 int main()
@@ -163,7 +176,7 @@ int main()
             cout << "\nType 'y' to enter a new item; type 'any value' to list: ";
             getline ( cin , y );
         }
-        system("cls");
+        m.cls();
         cout << "\nList from beginning to end:" << endl;
         m.vivod();
         cout << "\nDo you want to remove any item, y/n -? :";
@@ -188,7 +201,7 @@ re: cout << "\nEnter the number of deleted: ";
                 }
                 g = atoi( str.c_str() );
                 m.del(g);
-                system("cls");
+                m.cls();
                 cout << "\nList from beginning to end:" << endl;
                 m.vivod();
                 cout << "\nDo you want to remove any item, y/n -? :";
@@ -202,6 +215,7 @@ re: cout << "\nEnter the number of deleted: ";
         getline ( cin , x );
     }
     cout << endl;
-    system("pause");
+    cout << "Press ENTER to exit the program" << endl;
+    cin.get();
     return 0;
 }
