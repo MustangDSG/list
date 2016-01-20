@@ -2,7 +2,7 @@
 #include <cstring>
 #include <fstream>
 #include <stdlib.h>
-#define windows                         //To build the program in Linux, you must disable #define windows
+#define windows                         //To build the program in Linux-like system, you must disable #define windows
 using namespace std;
 ofstream result;
 
@@ -215,7 +215,9 @@ re: cout << "\nEnter the number of deleted: ";
         getline ( cin , x );
     }
     cout << endl;
+#ifdef windows
     cout << "Press ENTER to exit the program" << endl;
     cin.get();
+#endif
     return 0;
 }
