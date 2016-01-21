@@ -2,6 +2,7 @@
 #include <cstring>
 #include <fstream>
 #include <stdlib.h>
+#include <ctime>
 #define windows                         //To build the program in Linux-like system, you must disable #define windows
 using namespace std;
 ofstream result;
@@ -108,12 +109,17 @@ public:
 
     void vivod()                        //Output Method numbered list
     {
+        time_t seconds = time(NULL);
+        tm* timeinfo = localtime(&seconds);
+        result.open("result.txt", ios::out);
+        result.close();
         int counter2 = 1;
         result.open("result.txt", ios::app);
-        result << "---------------List from beginning to end:" << endl;
+        result << "---------------List from beginning to end:  "<< asctime(timeinfo) << endl;
         result.close();
         Elem *info = first;
         Elem *info2 = last;
+        cout << "\nList from beginning to end:  " << asctime(timeinfo) << endl;
         while( info )
         {
             result.open("result.txt", ios::app);
@@ -127,7 +133,8 @@ public:
             }
         }
         result.open("result.txt", ios::app);
-        result << "---------------List from back to front:" << endl;
+        result << "\n---------------List from back to front:" << endl;
+        result << "\n";
         result.close();
         cout << "\nList from back to front:" << endl;
         while( info2 )
@@ -156,8 +163,6 @@ public:
 
 int main()
 {
-    result.open("result.txt", ios::out);
-    result.close();
     string q;                           //Variable input data item in the list
     int g;                              //Variable numbers removed element
     Elemlist m;                         //Our list
@@ -183,7 +188,7 @@ int main()
             getline ( cin , y );
         }
         m.cls();
-        cout << "\nList from beginning to end:" << endl;
+        //cout << "\nList from beginning to end:" << endl;
         m.vivod();
         cout << "\nDo you want to remove any item, y/n -? :";
         getline ( cin , z );
@@ -208,7 +213,7 @@ re: cout << "\nEnter the number of deleted: ";
                 g = atoi( str.c_str() );
                 m.del(g);
                 m.cls();
-                cout << "\nList from beginning to end:" << endl;
+                //cout << "\nList from beginning to end:" << endl;
                 m.vivod();
                 cout << "\nDo you want to remove any item, y/n -? :";
                 getline (cin , w );
