@@ -6,7 +6,7 @@
 #define windows                         //To build the program in Linux-like system, you must disable #define windows
 using namespace std;
 ofstream result;
-const char A[] = "mama myla ramy";
+const char A[] = "mama myla ramy ramy myla mama";
 
 struct Elem                             //Describe the structure of a linked list
 {
@@ -182,7 +182,7 @@ int main()
         b = A[c];
         for ( int i = 0; i < d; i++)
         {
-            if ( ( b == A[i] ) && ( i != 0 ) )
+            if  ( b == A[i] ) //&& ( i != 0 ) )
             {
                 counter++;
             }
