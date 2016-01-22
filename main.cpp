@@ -6,6 +6,7 @@
 #define windows                         //To build the program in Linux-like system, you must disable #define windows
 using namespace std;
 ofstream result;
+const char A[] = "mama myla ramy";
 
 struct Elem                             //Describe the structure of a linked list
 {
@@ -163,6 +164,61 @@ public:
 
 int main()
 {
+        int d = 0;
+        int j = 0;
+        char b;
+        int o = 0;
+        char e[100] = ".";
+        int counter = 0;
+        int p = 0;
+        do
+        {
+            d++;
+        }while(A[d]);
+        cout << "Source string -  " << A << endl;
+        cout << "The initial line of " << d << " characters." << "\n" << endl;
+
+        for ( int c = 0 ; c < d ; c++ )
+        {
+            b = A[c];
+            for ( int i = 0; i < d; i++)
+            {
+                if ( ( b == A[i] ) && ( i != 0 ) )
+                {
+                    counter++;
+                }
+            }
+            int t = 0;
+            p = 0;
+            do
+            {
+                j++;
+            }while(e[j]);
+
+            while( p <= j )
+            {
+                if ( b == e[p] )
+                {
+                    t = 0;
+                    break;
+                }
+                else
+                {
+                    t = 1;
+                }
+
+                p++;
+            }
+            if ( t == 1 )
+            {
+                cout << b << "  " << counter << endl;
+                e[o] = b;
+                o++;
+            }
+            counter = 0;
+        }
+
+
     string q;                           //Variable input data item in the list
     int g;                              //Variable numbers removed element
     Elemlist m;                         //Our list
@@ -170,7 +226,7 @@ int main()
     string x = "y";                     //Variable for the main loop interface
     string z = "y";                     //Variable trigger conditions for removal cycle of the first element of the list
     string w = "y";                     //Variable cycle for removing the any item in the list
-    cout << "Welcome to the program cohesive compilation of the list!" << endl;
+    cout << "\nWelcome to the program cohesive compilation of the list!" << endl;
     cout << "(c) 2016 Vaspull - All rights reserved." << endl;
 #ifdef windows
     cout << "The program is compiled for use in Windows-like system." << endl;
@@ -188,7 +244,6 @@ int main()
             getline ( cin , y );
         }
         m.cls();
-        //cout << "\nList from beginning to end:" << endl;
         m.vivod();
         cout << "\nDo you want to remove any item, y/n -? :";
         getline ( cin , z );
@@ -213,7 +268,6 @@ re: cout << "\nEnter the number of deleted: ";
                 g = atoi( str.c_str() );
                 m.del(g);
                 m.cls();
-                //cout << "\nList from beginning to end:" << endl;
                 m.vivod();
                 cout << "\nDo you want to remove any item, y/n -? :";
                 getline (cin , w );
