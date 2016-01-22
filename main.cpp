@@ -164,60 +164,57 @@ public:
 
 int main()
 {
-        int d = 0;
-        int j = 0;
-        char b;
-        int o = 0;
-        char e[100] = ".";
-        int counter = 0;
-        int p = 0;
+    int d = 0;
+    int j = 0;
+    char b;
+    int o = 0;
+    char e[100] = ".";
+    int counter = 0;
+    int p = 0;
+    do
+    {
+        d++;
+    }while(A[d]);
+    cout << "Source string -  " << A << endl;
+    cout << "The initial line of " << d << " characters." << "\n" << endl;
+    for ( int c = 0 ; c < d ; c++ )
+    {
+        b = A[c];
+        for ( int i = 0; i < d; i++)
+        {
+            if ( ( b == A[i] ) && ( i != 0 ) )
+            {
+                counter++;
+            }
+        }
+        int t = 0;
+        p = 0;
         do
         {
-            d++;
-        }while(A[d]);
-        cout << "Source string -  " << A << endl;
-        cout << "The initial line of " << d << " characters." << "\n" << endl;
-
-        for ( int c = 0 ; c < d ; c++ )
+            j++;
+        }while(e[j]);
+        while( p <= j )
         {
-            b = A[c];
-            for ( int i = 0; i < d; i++)
+            if ( b == e[p] )
             {
-                if ( ( b == A[i] ) && ( i != 0 ) )
-                {
-                    counter++;
-                }
+                t = 0;
+                break;
             }
-            int t = 0;
-            p = 0;
-            do
+            else
             {
-                j++;
-            }while(e[j]);
+                t = 1;
+            }
 
-            while( p <= j )
-            {
-                if ( b == e[p] )
-                {
-                    t = 0;
-                    break;
-                }
-                else
-                {
-                    t = 1;
-                }
-
-                p++;
-            }
-            if ( t == 1 )
-            {
-                cout << b << "  " << counter << endl;
-                e[o] = b;
-                o++;
-            }
-            counter = 0;
+            p++;
         }
-
+        if ( t == 1 )
+        {
+            cout << b << "  " << counter << endl;
+            e[o] = b;
+            o++;
+        }
+        counter = 0;
+    }
 
     string q;                           //Variable input data item in the list
     int g;                              //Variable numbers removed element
