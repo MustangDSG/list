@@ -1,23 +1,24 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-#include <stdlib.h>
 #include <ctime>
-#define windows                         //To build the program in Linux-like system, you must disable #define windows
-using namespace std;
-ofstream result;
-const char A[] = "mama myla ramy ramy myla mama";
+#include <stdlib.h>
 
-struct Elem                             //Describe the structure of a linked list
-{
-    string data;                        //The information includes a list item
-    Elem* next;                         //Pointer to the next element
-    Elem* prev;                         //A pointer to the previous element
-};
+using namespace std;
+
+ofstream result;
+
+const char A[] = "mama myla ramy ramy myla mama";
 
 class Elemlist                          //We describe a class list of the elements of the structure Elem
 {
 private:
+    struct Elem                         //Describe the structure of a linked list
+    {
+        string data;                    //The information includes a list item
+        Elem* next;                     //Pointer to the next element
+        Elem* prev;                     //A pointer to the previous element
+    };
     int counter;                        //Counter items
     Elem* first;                        //Pointer to the first element of the list
     Elem* last;                         //Pointer to the last item in the list
@@ -152,13 +153,16 @@ public:
         }
     }
 
-    void cls()  //crossplatform clear screen
+    int cls()  //crossplatform clear screen
     {
+        int r;
 #ifdef windows
-        system("cls");
+        // FIX: ignoring return value...
+        r = system("cls");
 #else
-        system("clear");
+        r = system("clear");
 #endif
+        return r;
     }
 };
 
@@ -257,6 +261,7 @@ re: cout << "\nEnter the number of deleted: ";
                 {
                     ch = str.c_str()[t];
                 }
+                // FIX: 'ch' may be uninitialized, because of possible strLength == 0.
                 if ( !isdigit(ch) )
                 {
                     cerr << "Invalid value, try again\n";
