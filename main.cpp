@@ -8,7 +8,28 @@ using namespace std;
 
 ofstream result;
 
-const char A[] = "mama myla ramy ramy myla mama";
+int cls()  //crossplatform clear screen
+{
+    int r;
+#ifdef windows
+    r = system("cls");
+#else
+    r = system("clear");
+#endif
+    return r;
+}
+
+int greeting()
+{
+    cout << "Welcome!" << endl;
+    cout << "(c) 2016 Vaspull - All rights reserved." << endl;
+#ifdef windows
+    cout << "The program is compiled for use in Windows-like system.\n" << endl;
+#else
+    cout << "The program is compiled for use in Linux-like system.\n" << endl;
+#endif
+    return(0);
+}
 
 class Elemlist                          //We describe a class list of the elements of the structure Elem
 {
@@ -152,63 +173,56 @@ public:
             }
         }
     }
-
-    int cls()  //crossplatform clear screen
-    {
-        int r;
-#ifdef windows
-        // FIX: ignoring return value...
-        r = system("cls");
-#else
-        r = system("clear");
-#endif
-        return r;
-    }
 };
 
-int main()
+int char_analisys()
 {
+    cls();
+    greeting();
+    string char_analisys;
+    char A[2000] = "";
+    for ( int i = 0 ; i < 2000 ; i++ ) A[i] = 0;
+    cout << "Enter a string for analysis:" << endl;
+    cout << ">";
+    getline(cin, char_analisys);
+    strcpy( A , char_analisys.c_str() );
     int d = 0;
     int j = 0;
     char b;
     int o = 0;
-    char e[100] = ".";
+    char e[100] = "";
+    for ( int i = 0 ; i < 100 ; i++ ) e[i] = 0;
     int counter = 0;
     int p = 0;
-    do
-    {
-        d++;
-    }while(A[d]);
-    cout << "Source string -  " << A << endl;
+    while( A[d] ) d++; //Поиск длины анализируемой строки
+    cout << "\nSource string -  " << A << endl;
     cout << "The initial line of " << d << " characters." << "\n" << endl;
-    for ( int c = 0 ; c < d ; c++ )
+    for ( int c = 0 ; c < d ; c++ ) //главный цикл анализа строки, выполняется равное количеству символов в строке раз
     {
+        int k = 1;
+        int t = 0;
+        p = 0;
         b = A[c];
-        for ( int i = 0; i < d; i++)
+        while( e[j] ) j++; //поиск длины дополнительного массива, в который будут складоваться символы используемые в анализируемой строке (каждый символ 1 раз)
+        for ( int i = 0; i < d; i++) //цикл для подсчета количества раз использования каждого символа в строке, а также запись в дополнительный массив символов используемых в анализируемой строке (каждый символ 1 раз)
         {
-            if  ( b == A[i] ) //&& ( i != 0 ) )
+            if ( b == A[i] )
             {
                 counter++;
             }
-        }
-        int t = 0;
-        p = 0;
-        do
-        {
-            j++;
-        }while(e[j]);
-        while( p <= j )
-        {
-            if ( b == e[p] )
+            if  ( ( p <= j ) && ( k != 0 ) )
             {
-                t = 0;
-                break;
+                if ( b == e[p] )
+                {
+                    t = 0;
+                    k = 0;
+                }
+                else
+                {
+                    t = 1;
+                    k = 1;
+                }
             }
-            else
-            {
-                t = 1;
-            }
-
             p++;
         }
         if ( t == 1 )
@@ -219,7 +233,14 @@ int main()
         }
         counter = 0;
     }
+    cout << "\nThe End." << endl;
+    return(0);
+}
 
+int list()
+{
+    cls();
+    greeting();
     string q;                           //Variable input data item in the list
     int g;                              //Variable numbers removed element
     Elemlist m;                         //Our list
@@ -227,13 +248,6 @@ int main()
     string x = "y";                     //Variable for the main loop interface
     string z = "y";                     //Variable trigger conditions for removal cycle of the first element of the list
     string w = "y";                     //Variable cycle for removing the any item in the list
-    cout << "\nWelcome to the program cohesive compilation of the list!" << endl;
-    cout << "(c) 2016 Vaspull - All rights reserved." << endl;
-#ifdef windows
-    cout << "The program is compiled for use in Windows-like system." << endl;
-#else
-    cout << "The program is compiled for use in Linux-like system" << endl;
-#endif
     while (x == "y")                    //The main loop control interface
     {
         while (y == "y")                //Cycle adding several new items to the list
@@ -244,7 +258,7 @@ int main()
             cout << "\nType 'y' to enter a new item; type 'any value' to list: ";
             getline ( cin , y );
         }
-        m.cls();
+        cls();
         m.vivod();
         cout << "\nDo you want to remove any item, y/n -? :";
         getline ( cin , z );
@@ -261,7 +275,6 @@ re: cout << "\nEnter the number of deleted: ";
                 {
                     ch = str.c_str()[t];
                 }
-                // FIX: 'ch' may be uninitialized, because of possible strLength == 0.
                 if ( !isdigit(ch) )
                 {
                     cerr << "Invalid value, try again\n";
@@ -269,7 +282,7 @@ re: cout << "\nEnter the number of deleted: ";
                 }
                 g = atoi( str.c_str() );
                 m.del(g);
-                m.cls();
+                cls();
                 m.vivod();
                 cout << "\nDo you want to remove any item, y/n -? :";
                 getline (cin , w );
@@ -282,9 +295,51 @@ re: cout << "\nEnter the number of deleted: ";
         getline ( cin , x );
     }
     cout << endl;
-#ifdef windows
-    cout << "Press ENTER to exit the program" << endl;
-    cin.get();
-#endif
-    return 0;
+    return (0);
+}
+
+int main()
+{
+re: cls();
+    greeting();
+    cout << "Choose\n";
+    cout << "1. Char analysis programm\n";
+    cout << "2. List programm\n";
+    cout << "3. Exit\n";
+    cout << "Selection: ";
+
+    char ch;
+    string str;
+    int g;
+    getline ( cin , str );
+    int strlength = str.length();
+    for ( int t = 0 ; t < strlength; t++ )
+    {
+        ch = str.c_str()[t];
+    }
+    if ( !isdigit(ch) )
+    {
+        cerr << "Invalid value, press Enter to try again\n";
+        cin.get();
+        goto re;
+    }
+    g = atoi( str.c_str() );
+
+    switch ( g )
+    {
+    case 1:
+        char_analisys();
+        break;
+    case 2:
+        list();
+        break;
+    case 3:
+        cout << "\nThe End." << endl;
+        return(0);
+    default:
+        cerr << "Invalid value, press Enter to try again\n";
+        cin.get();
+        goto re;
+    }
+    return(0);
 }
