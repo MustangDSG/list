@@ -3,6 +3,8 @@ QT -= gui
 
 CONFIG += c++11
 
+QMAKE_CXXFLAGS += -Wall -O2
+
 TARGET = List
 CONFIG += console
 CONFIG -= app_bundle
