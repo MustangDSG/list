@@ -266,7 +266,7 @@ int list()
         {
             while ( w == "y")
             {
-                char ch;
+                char ch = 'q';
                 string str;
 re: cout << "\nEnter the number of deleted: ";
                 getline ( cin , str );
@@ -308,7 +308,7 @@ re: cls();
     cout << "3. Exit\n";
     cout << "Selection: ";
 
-    char ch;
+    char ch = 'q';
     string str;
     int g;
     getline ( cin , str );
