@@ -3,7 +3,7 @@
 #include <fstream>
 #include <ctime>
 #include <stdlib.h>
-
+//ignore this string, it`s some test...
 using namespace std;
 
 ofstream result;
